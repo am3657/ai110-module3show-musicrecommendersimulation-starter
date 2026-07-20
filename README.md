@@ -24,10 +24,30 @@ Some prompts to answer:
 - What features does each `Song` use in your system
   - For example: genre, mood, energy, tempo
 - What information does your `UserProfile` store
+
+  Each song object in my system is decided based on four fundamental features: the target mood, target energy, genre, and acousticness. While there are other features that come into play like danceability, valence, and tempo, the four features mentioned help create the necessary information to develop the `UserProfile`, which is of key importance for the `Recommender` to help generate the ranked reccommendation list of songs.
+
 - How does your `Recommender` compute a score for each song
+
+  The `Recommender` chooses which songs to recommend based on a calculated weighted sum as part of the designed "Scoring Rule" for each song picked from CSV file. Due to emphasis on the person's mood rather than the genre, weights are assigned in descending order for each of the four features.
+
+  Maximum possible score is 5.0:
+  Mood = 2.0
+  Energy = 1.5
+  Genre = 1.0
+  Acoustic = 0.5
+
+  Score logic formula:
+  score = (2.0 × mood_match) + (1.5 × energy_sim) + (1.0 × genre_match) + (0.5 × acoustic_fit)
+
+  This score is computed for every `Song` to help accurately justify why this song fits the mood of the listener as stated in their preferenes.
+
 - How do you choose which songs to recommend
 
-You can include a simple diagram or bullet list if helpful.
+  Based on the score assigned for each song, the scores are sorted in descending order to show the rank assigned to each song. If two songs are tied with their scores, the tie is broken by preferring the higher mood match followed by a higher energy match, and returns the top K songs.
+
+  You can include a simple diagram or bullet list if helpful.
+  ![A brief data flow chart of the song recommendation process.](image.png)
 
 ---
 
@@ -41,6 +61,8 @@ You can include a simple diagram or bullet list if helpful.
    python -m venv .venv
    source .venv/bin/activate      # Mac or Linux
    .venv\Scripts\activate         # Windows
+
+   ```
 
 2. Install dependencies
 
@@ -79,7 +101,7 @@ Paste a sample of your recommender's output here as a text block so a reader can
 #   3. ...
 ```
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
+**Screenshot or video** _(optional)_: <!-- Insert a screenshot or demo video link here -->
 
 ---
 
@@ -117,6 +139,3 @@ Write 1 to 2 paragraphs here about what you learned:
 
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
-
-
-
