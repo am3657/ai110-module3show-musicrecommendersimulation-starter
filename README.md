@@ -101,6 +101,42 @@ Paste a sample of your recommender's output here as a text block so a reader can
 #   3. ...
 ```
 
+PS C:\Codepath class\ai110-module3show-musicrecommendersimulation-starter> python -m src.main
+Loading songs from data/songs.csv...
+Loaded songs: 18
+Your taste profile:
+mood='happy' genre='pop' energy=0.8 acoustic=0.1
+
+Top 5 recommendations:
+
+1. Sunrise City (pop, happy)
+   Score: 4.93 / 5.00
+   - matches your current mood (happy)
+   - matches your favorite genre (pop)
+   - energy (0.82) is close to your target (0.80)
+   - acousticness (0.18) matches what you're looking for
+
+2. Rooftop Lights (indie pop, happy)
+   Score: 3.81 / 5.00
+   - matches your current mood (happy)
+   - energy (0.76) is close to your target (0.80)
+
+3. Gym Hero (pop, intense)
+   Score: 2.78 / 5.00
+   - matches your favorite genre (pop)
+   - energy (0.93) is close to your target (0.80)
+   - acousticness (0.05) matches what you're looking for
+
+4. Concrete Skyline (hip-hop, energetic)
+   Score: 1.92 / 5.00
+   - energy (0.85) is close to your target (0.80)
+   - acousticness (0.08) matches what you're looking for
+
+5. Night Drive Loop (synthwave, moody)
+   Score: 1.86 / 5.00
+   - energy (0.75) is close to your target (0.80)
+   - acousticness (0.22) matches what you're looking for
+
 **Screenshot or video** _(optional)_: <!-- Insert a screenshot or demo video link here -->
 
 ---
