@@ -43,16 +43,38 @@ def main() -> None:
     print(f"Loaded songs: {len(songs)}")
 
     # Starter example profile
-    user_prefs = {
-        "current_mood": "happy",
+    # user_prefs = {
+    #     "current_mood": "happy",
+    #     "favorite_genre": "pop",
+    #     "target_energy": 0.8,
+    #     "desired_acoustic": 0.1,
+    # }
+
+    test_profiles = [
+    ("High-Energy Pop", {
+        "current_mood": "energetic",
         "favorite_genre": "pop",
-        "target_energy": 0.8,
+        "target_energy": 0.85,
         "desired_acoustic": 0.1,
-    }
+    }),
+    ("Chill Lofi", {
+        "current_mood": "chill",
+        "favorite_genre": "lofi",
+        "target_energy": 0.3,
+        "desired_acoustic": 0.8,
+    }),
+    ("Deep Intense Rock", {
+        "current_mood": "intense",
+        "favorite_genre": "rock",
+        "target_energy": 0.9,
+        "desired_acoustic": 0.1,
+    }),
+]
 
-
-    recommendations = recommend_songs(user_prefs, songs, k=5)
-    print_recommendations(user_prefs, recommendations)
+    for profile_name, user_prefs in test_profiles:
+        print(f"\n--- {profile_name} ---")
+        recommendations = recommend_songs(user_prefs, songs, k=5)
+        print_recommendations(user_prefs, recommendations)
 
 
 if __name__ == "__main__":

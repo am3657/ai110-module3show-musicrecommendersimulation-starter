@@ -116,6 +116,13 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
         + (0.5 * acoustic_fit)
     )
 
+    #Weight shift
+    # score = (
+    #     (2.0 * mood_match)
+    #     + (3.0 * energy_sim)   # doubled from 1.5
+    #     + (0.5 * genre_match)  # halved from 1.0
+    #     + (0.5 * acoustic_fit)
+    # )
     if not reasons:
         reasons.append("no strong matches, included based on overall similarity")
 
