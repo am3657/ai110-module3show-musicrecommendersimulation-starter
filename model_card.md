@@ -2,32 +2,31 @@
 
 ## 1. Model Name
 
-Give your model a short, descriptive name.
-
----
+MoodBooster
 
 ## 2. Intended Use
 
 Describe what your recommender is designed to do and who it is for.
 
-Prompts:
+The recommender is designed to provide a ranked list of top K songs that align with a user's profile. The biggest assumption that it makes about the user is that they are primarily listening songs that go well with their current mood to ensure the user is not stuck in a filter bubble filled with songs of the same genre. This design choice is perfect in delivering recommendations the match the mood and giving them exposure to more genres.
 
-- What kind of recommendations does it generate
-- What assumptions does it make about the user
-- Is this for real users or classroom exploration
-
----
+## As of now the recommender is not meant for real users due it being in its development stage, so this is for classroom exploration.
 
 ## 3. How the Model Works
 
 Explain your scoring approach in simple language.
 
-Prompts:
-
 - What features of each song are used (genre, energy, mood, etc.)
-- What user preferences are considered
-- How does the model turn those into a score
-- What changes did you make from the starter logic
+  Each song uses genre, mood, energy, tempo_bpm, valence, danceability, and acousticness.
+
+- What user preferences are considered?
+  A UserProfile consists of the user's mood, facorite genre, target energy, and desired acoustic.
+
+- How does the model turn those into a score?
+  For each song, the system checks whether its genre and mood match what the person picked, and separately checks how close its energy and "acoustic feel" are to what the person wants. It then adds these four pieces together, giving mood the biggest boost and acoustic feel the smallest, to get one final score used to rank the songs.
+
+- What changes did you make from the starter logic?
+  I changed the some features names like mood to current mood, the display logic in main.py for better reasoning, implemented score logic, and added new songs to diversify the list.
 
 Avoid code here. Pretend you are explaining the idea to a friend who does not program.
 
@@ -57,11 +56,14 @@ Prompts:
 
 Where does your system seem to work well
 
-Prompts:
+- User types for which it gives reasonable results:
+  The system works well for users whose favorite_genre and current_mood both exist as exact labels in the catalog and whose target_energy/desired_acoustic sit near a real song's values, like the "Chill Lofi" profile that returned tightly-matched lofi/chill tracks.
 
-- User types for which it gives reasonable results
-- Any patterns you think your scoring captures correctly
-- Cases where the recommendations matched your intuition
+- Any patterns you think your scoring captures correctly:
+  It is always able to calculate the best score for songs by rewarding to closeness to the target, rather than purely relying on the exact magnitude given in the user profile. Morever, the recommender is also able give results favoring the user's current mood over favorite, mirroring the design choice I had in mind.
+
+- Cases where the recommendations matched your intuition:
+  For the default pop/happy profile, Sunrise City (pop, happy, energy 0.82) landing at #1 with a near-perfect score matched exactly what a human would expect from those inputs.
 
 ---
 
@@ -78,7 +80,7 @@ Prompts:
 
 The biggest bias in the system is the increased weight of mood, due to the design choice I chose for the `Recommender`. This means all the other features, have less weight when calculating the score. Additionally, some features like danceability and valence were not considered due to their redundance. However, they might have produced slightly differing recommendations.
 
-Moreover due to the nature of the current scoring logic,
+Moreover due to the nature of the scoring logic favoring the mood of the user and a higher number of pop songs in the catalog, certain users favoring other generes might not get the best recommendations all the time.
 
 ---
 
@@ -174,21 +176,27 @@ Prompts:
 
 Ideas for how you would improve the model next.
 
-Prompts:
+- Additional features or preferences:
+  Larger Metadata about the song, and more collaborative filtering features like skip rate and listening time/completion.
 
-- Additional features or preferences
-- Better ways to explain recommendations
-- Improving diversity among the top results
-- Handling more complex user tastes
+- Better ways to explain recommendations:
+  A better way to explain recommendations by accompanying the product with UI components similar to Spotify, which allows for a much better presentation. A dropdown can also be added for each recommended song to show the reasoning behind each choice.
+
+- Improving diversity among the top results:
+  Currently, the catalog is featuring more pop songs overall compared to other genres. This can be solved by increasing the length of the catalog so that the overall distribution evens out with more choices to return to the user.
+
+- Handling more complex user tastes:
+  The best way to accomodate much more complex user tastes is to make the description of the songs in the catalog less vague. This makes sure the scoring algorithm doesn't make a score based on common words, filtering out how the user is really feeling.
 
 ---
 
 ## 9. Personal Reflection
 
-A few sentences about your experience.
+- What you learned about recommender systems?
+  I learned how the recommender systems used by popular platforms like Spotify and Youtube are driven by a combination of collaborative filtering and content filtering, with the help of certain of mathematical formulas to give us the right recommendations.
 
-Prompts:
+- Something unexpected or interesting you discovered?
+  It was interesting to see how accurate a couple of mathamethical formulas and calculations are able to properly decide which songs are the best fit as long as the values are consistent and standarized.
 
-- What you learned about recommender systems
-- Something unexpected or interesting you discovered
-- How this changed the way you think about music recommendation apps
+- How this changed the way you think about music recommendation apps?
+  Even though the scope of the project was extremely small, it gave a good idea of the about the sclae of the processes happening behind music recommendation apps. A good recommendation app needs to take into amount many variables and gather lots of metadata about the songs and the users to ensure there are no biases. Beyond the scoring logic must also be extremely sophisticated inorder to mange the weight system properly and cater to users with more complex tastes.

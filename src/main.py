@@ -52,14 +52,14 @@ def main() -> None:
 
     test_profiles = [
     ("High-Energy Pop", {
-        "current_mood": "energetic",
-        "favorite_genre": "pop",
+        "current_mood": "happy",
+        "favorite_genre": "energetic pop",
         "target_energy": 0.85,
         "desired_acoustic": 0.1,
     }),
     ("Chill Lofi", {
         "current_mood": "chill",
-        "favorite_genre": "lofi",
+        "favorite_genre": "chill lofi",
         "target_energy": 0.3,
         "desired_acoustic": 0.8,
     }),

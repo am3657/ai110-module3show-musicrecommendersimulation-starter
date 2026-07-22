@@ -11,8 +11,6 @@ Your goal is to:
 - Evaluate what your system gets right and wrong
 - Reflect on how this mirrors real world AI recommenders
 
-Replace this paragraph with your own summary of what your version does.
-
 ---
 
 ## How The System Works
@@ -145,9 +143,12 @@ Top 5 recommendations:
 
 Use this section to document the experiments you ran. For example:
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+- What happened when you changed the weight on genre from 2.0 to 0.5?
+
+Genre stopped being a strong enough signal to compete with energy closeness, so songs from completely unrelated genres began outranking exact genre matches whenever their energy happened to sit closer to the target. This confirmed that genre's influence on the final ranking depends entirely on its weight relative to energy, not on whether a match occurred at all.
+
+- How did your system behave for different types of users?
+  For profiles whose mood/genre combination was well represented in the catalog (like "Chill Lofi"), the top results stayed tightly matched on both genre and mood even after reweighting. For less-represented combinations (like "High-Energy Pop"), genre matches got pushed down the list more easily, showing the system is more stable for common taste profiles and more volatile for niche ones.
 
 ---
 
@@ -155,11 +156,9 @@ Use this section to document the experiments you ran. For example:
 
 Summarize some limitations of your recommender.
 
-Examples:
+Even though it is able properly and accurately give good forusers with many moods, it still gets confused when given user profiles with more complex favored genres, forcing the recommender to base its judgement completely on the mood. However, it does help the cause of this project becasue my recommender favors mood over genre.
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+Another limitation which can be a problem if this project were to be meant for real users is that the song library is really small with more pop songs compared to the rest. This can create a bias, resulting more pop songs being recommended than necessary.
 
 You will go deeper on this in your model card.
 
@@ -171,7 +170,6 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+From this project, I was able to learn how recommender systems in popular platforms are showing users' their recommendations with the help of the mathematically constructed scoring formulas. Morever, it is also able to use content based filtering and collaborative filtering to give the best predictions.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+However from evaluating my project, I was able to see certain limitations and biases that can occur in recommender systems. Due to the use of weights when implementing the scoring logic, certain attributes of a user profile may be seen as irrevlant if too much weights are assigned to other attributes. This can create a bias against certain types of songs. It is also important that the song collection is diverse with its energy level and genre to ensure any type of user will recieve recommendations accurately.
